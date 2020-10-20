@@ -1,0 +1,18 @@
+= Antora mini Ted Talk
+Aurélien Campergue <aurelien.campergue@camptocamp.com>
+:description: This contains the exlanations and the scenario to execute during the mini ted talk.
+:keywords: antora, asciidoc
+:sectanchors:
+:published-url: https://camptocamp.github.io/antora-mini-ted-talk/
+
+
+== Overview
+
+This repository contains the exlanations and the scenario to execute during the mini ted talk.
+
+== Documentation
+
+The documentation is written using Asciidoc and Antora and located in the docs/ folder.
+The https://documentation.divio.com/structure/[Divio documentation structure] is used to organize its content.
+
+The documentation is published here: {published-url}

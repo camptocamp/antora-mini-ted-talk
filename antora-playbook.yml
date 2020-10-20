@@ -1,0 +1,21 @@
+site:
+  title: Antora mini Ted Talk
+  # the 404 page and sitemap files only get generated when the url property is set
+  url: https://github.com/camptocamp/antora-mini-ted-talk
+  start_page: antora-mini-ted-talk::index.adoc
+content:
+  sources:
+  - url: ./
+    branches: HEAD
+    edit_url: false
+    start_path: docs
+ui:
+  bundle:
+    url: https://github.com/acampergue-camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
+    #url: https://github.com/camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
+    snapshot: true
+  supplemental_files:
+  - path: ui.yml
+    contents: |
+      static_files: [ .nojekyll ]
+  - path: .nojekyll

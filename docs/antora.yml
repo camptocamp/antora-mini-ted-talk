@@ -1,0 +1,5 @@
+name: antora-mini-ted-talk
+title: Antora Mini Ted Talk
+version: 0.1.0
+nav:
+- modules/ROOT/nav.adoc
