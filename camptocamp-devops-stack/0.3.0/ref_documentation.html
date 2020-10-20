@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Untitled :: Antora mini Ted Talk</title>
-    <link rel="canonical" href="https://github.com/camptocamp/antora-mini-ted-talk/antora-mini-ted-talk/0.1.0/ref_documentation.html">
+    <link rel="canonical" href="https://github.com/camptocamp/antora-mini-ted-talk/camptocamp-devops-stack/0.3.0/ref_documentation.html">
     <meta name="generator" content="Antora 2.3.4">
     <link rel="stylesheet" href="../../_/css/site.css">
     <link rel="icon" href="../../_/img/c2c_favicon.png" type="image/x-icon">
@@ -28,12 +28,12 @@
   </nav>
 </header>
 <div class="body">
-<div class="nav-container" data-component="antora-mini-ted-talk" data-version="0.1.0">
+<div class="nav-container" data-component="camptocamp-devops-stack" data-version="0.3.0">
   <aside class="nav">
     <div class="panels">
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
-    <h3 class="title"><a href="index.html">Antora Mini Ted Talk</a></h3>
+    <h3 class="title"><a href="index.html">Camptocamp’s DevOps stack</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
@@ -42,10 +42,55 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="tutorials.html">Tutorials</a>
+    <span class="nav-text">Tutorials</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="run.html">Run the stack</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">How-to guides</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="develop.html">Develop the stack</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="how_to_write_doc.html">Write documentation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#antora-ui-c2c:ROOT:index.adoc">Customize UI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="access_services_in_cluster.html">Access Services in the cluster</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_kubernetes_api.html">Access Kubernetes API</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_argocd_webui.html">Access ArgoCD web UI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_traefik_dashboard.html">Access Traefik dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_vault_ui.html">Access Vault UI</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_grafana_dashboard.html">Access Grafana dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_prometheus_dashboard.html">Access Prometheus dashboard</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="access_alertmanager_dashboard.html">Access Alertmanager dashboard</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -53,6 +98,12 @@
     <button class="nav-item-toggle"></button>
     <span class="nav-text">Reference Guides</span>
 <ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="provisioning.html">Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="deployment.html">Deployment</a>
+  </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="ref_documentation.html">Documentation</a>
   </li>
@@ -63,9 +114,21 @@
     <span class="nav-text">Explanations</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_k3s.html">Why k3s?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_terraform.html">Why Terraform?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="why_automated_sync.html">Why Automated Sync Policy?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="why_antora.html">Why Antora for the documentation?</a>
   </li>
 </ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="CHANGELOG.html">Changelog</a>
   </li>
 </ul>
   </li>
@@ -74,23 +137,23 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">Antora Mini Ted Talk</span>
-    <span class="version">0.1.0</span>
+    <span class="title">Camptocamp’s DevOps stack</span>
+    <span class="version">0.3.0</span>
   </div>
   <ul class="components">
-    <li class="component is-current">
+    <li class="component">
       <span class="title">Antora Mini Ted Talk</span>
       <ul class="versions">
-        <li class="version is-current is-latest">
-          <a href="index.html">0.1.0</a>
+        <li class="version is-latest">
+          <a href="../../antora-mini-ted-talk/0.1.0/index.html">0.1.0</a>
         </li>
       </ul>
     </li>
-    <li class="component">
+    <li class="component is-current">
       <span class="title">Camptocamp’s DevOps stack</span>
       <ul class="versions">
-        <li class="version is-latest">
-          <a href="../../camptocamp-devops-stack/0.3.0/index.html">0.3.0</a>
+        <li class="version is-current is-latest">
+          <a href="index.html">0.3.0</a>
         </li>
       </ul>
     </li>
@@ -102,10 +165,10 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="index.html" class="home-link"></a>
+  <a href="../../antora-mini-ted-talk/0.1.0/index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">Antora Mini Ted Talk</a></li>
+    <li><a href="index.html">Camptocamp’s DevOps stack</a></li>
     <li>Reference Guides</li>
     <li><a href="ref_documentation.html">Documentation</a></li>
   </ul>
