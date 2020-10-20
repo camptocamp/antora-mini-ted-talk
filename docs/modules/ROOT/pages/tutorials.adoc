@@ -145,8 +145,9 @@ You can use this content as is :
 name: Antora Doc 
 on:
   push:
-    branches: 
-      - master
+    branches:
+      # Be careful here, master was renamed to main by default
+      - main
 env:
   SITE_DIR: 'site'
 jobs:

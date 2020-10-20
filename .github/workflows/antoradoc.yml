@@ -2,7 +2,7 @@ name: Antora Doc
 on:
   push:
     branches: 
-      - master
+      - main
 env:
   SITE_DIR: 'site'
 jobs:
