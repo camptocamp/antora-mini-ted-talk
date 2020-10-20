@@ -198,6 +198,55 @@ $ git push
 
 === using UI
 
-image::github_actions_p1.png[link="{url-repo}",800,600]
-image::github_actions_p2.png[link="{url-repo}",800,600]
-image::github_actions_p3.png[link="{url-repo}",800,600]
+image::github_actions_p1.png[800,600]
+image::github_actions_p2.png[800,600]
+image::github_actions_p3.png[800,600]
+image::github_actions_p4.png[800,600]
+
+image::github_pages_settings.png[800,600]
+
+== Include external documentations 
+
+To create a meta doc and/or links to other documentations, you can add links to those projects in the `antora-playbook.yml`
+
+try adding :
+
+[source,yaml]
+----
+  - url: https://github.com/camptocamp/camptocamp-devops-stack
+    branches: master
+    edit_url: false
+    start_path: docs
+----
+
+to make your antora-playbook look like 
+
+[source,yaml]
+----
+site:
+  title: TITLE_OF_YOUR_DOC
+  # the 404 page and sitemap files only get generated when the url property is set
+  url: https://github.com/camptocamp/NAME_OF_YOUR_PROJECT
+  start_page: YOUR_DOC_NAME::index.adoc
+content:
+  sources:
+  - url: ./
+    branches: HEAD
+    edit_url: false
+    start_path: docs
+  - url: https://github.com/camptocamp/camptocamp-devops-stack
+    branches: master
+    edit_url: false
+    start_path: docs
+ui:
+  bundle:
+    url: https://github.com/camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
+    # Using a modified version with dark theme for local tests
+    #url: https://github.com/acampergue-camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
+    snapshot: true
+  supplemental_files:
+  - path: ui.yml
+    contents: |
+      static_files: [ .nojekyll ]
+  - path: .nojekyll
+----
