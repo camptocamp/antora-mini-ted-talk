@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<sitemap>
-<loc>https://github.com/camptocamp/antora-mini-ted-talk/sitemap-antora-mini-ted-talk.xml</loc>
-</sitemap>
-<sitemap>
-<loc>https://github.com/camptocamp/antora-mini-ted-talk/sitemap-camptocamp-devops-stack.xml</loc>
-</sitemap>
-</sitemapindex>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://github.com/camptocamp/antora-mini-ted-talk/antora-mini-ted-talk/0.1.0/how_to_write_doc.html</loc>
+<lastmod>2020-10-20T10:06:51.771Z</lastmod>
+</url>
+<url>
+<loc>https://github.com/camptocamp/antora-mini-ted-talk/antora-mini-ted-talk/0.1.0/index.html</loc>
+<lastmod>2020-10-20T10:06:51.771Z</lastmod>
+</url>
+<url>
+<loc>https://github.com/camptocamp/antora-mini-ted-talk/antora-mini-ted-talk/0.1.0/ref_documentation.html</loc>
+<lastmod>2020-10-20T10:06:51.771Z</lastmod>
+</url>
+<url>
+<loc>https://github.com/camptocamp/antora-mini-ted-talk/antora-mini-ted-talk/0.1.0/tutorials.html</loc>
+<lastmod>2020-10-20T10:06:51.771Z</lastmod>
+</url>
+<url>
+<loc>https://github.com/camptocamp/antora-mini-ted-talk/antora-mini-ted-talk/0.1.0/why_antora.html</loc>
+<lastmod>2020-10-20T10:06:51.771Z</lastmod>
+</url>
+</urlset>
