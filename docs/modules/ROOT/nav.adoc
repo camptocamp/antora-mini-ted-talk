@@ -1,7 +1,7 @@
 * xref:index.adoc[Introduction]
 * xref:tutorials.adoc[Tutorials]
-** xref:how_to_write_doc.adoc[Write documentation]
+** xref:documentation:how_to_write_doc.adoc[Write documentation]
 * Reference Guides
-** xref:ref_documentation.adoc[Documentation]
+** xref:documentation:ref_documentation.adoc[Documentation]
 * Explanations
-** xref:why_antora.adoc[Why Antora for the documentation?]
+** xref:documentation:why_antora.adoc[Why Antora for the documentation?]
