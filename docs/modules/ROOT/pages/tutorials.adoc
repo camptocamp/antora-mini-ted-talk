@@ -1,98 +1,118 @@
+= Antora's Hands-on
 :project-name: antora-mini-ted-talk
 :url-repo: https://github.com/camptocamp/{project-name}
+:antora-docs-url: https://docs.antora.org/antora/2.3/
+:github-url: https://github.com/
+:antora-nav-page-url: https://docs.antora.org/antora/2.3/navigation/files-and-lists/#whats-a-nav-file
 
-include::ROOT:partial$header_note.adoc[]
+To illustrate the possibilities of the {antora-docs-url}[Antora Tool] in {github-url}[Github], we'll create a first project together.
 
-== Create the base module directory
+IMPORTANT: You need to https://docs.antora.org/antora/2.3/install/install-antora/[install antora] if you want to generate your documentation locally before pushing it.
+
+== Initialize your project
+
+After creating and cloning a new Github project, we will create our first documentation page.
+All documentation pages should be written under the `docs` directory, and has to be part of a module.
+
+The default module is named `ROOT`, that's the one we're gonna use as a start.
+
+CAUTION: All command lines in this tutorial rely on the fact that your current directory is the ROOT of your github's repo clone.
 
 [source,shell]
 ----
-mkdir docs/modules/ROOT/
-touch docs/modules/ROOT/nav.adoc
-mkdir docs/modules/ROOT/pages
+# Create docs directory
+mkdir docs
+
+# Create a ROOT module directory
+mkdir -p docs/modules/ROOT
 ----
 
 == Create index page
 
+In this module we will create the default page named `index.adoc`. This file has to be placed in a `pages` subdirectory of the module.
+
+[source,shell]
+----
+# Create pages directory
+mkdir -p docs/modules/ROOT/pages
+
+# Initialize an empty new index file
+touch docs/modules/ROOT/pages/index.adoc
+----
+
+the content of the `index.adoc` should use the https://asciidoc.org/[Asciidoc] syntax. Use the following code snippet to initialize this file :
 
 [source,asciidoc]
 ----
-= Antora mini Ted Talk
-Aurélien Campergue <aurelien.campergue@camptocamp.com>
-:description: This contains the exlanations and the scenario to execute during the mini ted talk.
+= Document's title (Level 0)
+Author Name <author.name@camptocamp.com>
+:description: This is a description.
 :keywords: antora, asciidoc
 :sectanchors:
-:url-repo: https://github.com/camptocamp/antora-mini-ted-talk
-
+:url-repo: https://github.com/NAME_OF_YOUR_PROJECT
 
 image::github.svg[link="{url-repo}",150,250]
 
-{url-repo}[This repository] contains the exlanations and the scenario to execute during the mini ted talk.
+{url-repo}[This repository] contains the my test code for this Antora's Hands-on.
 
- include::ROOT:partial$header_note.adoc[]
+video::BAJ8F7yQz64[youtube]
 ----
 
-== Create additional pages
+NOTE: Every file with `adoc` extension inside the `pages` subdirectory will generate a HTML page in the documentation produced by Antora
 
-one adoc will create one corresponding web page
+== Initialize the navigation file
 
-== Include pages in website (and nav bar)
+We will know initialize a {antora-nav-page-url}[navigation file] which will allow us to include the index page in the resulting website.
 
+[source,shell]
+----
+# Initialize an empty navigation file
 touch docs/modules/ROOT/nav.adoc
+----
+
+the content of the `nav.adoc` should be structure as a list of references, use this snippet to initialize yours
 
 [source,asciidoc]
 ----
 * xref:index.adoc[Introduction]
-* xref:tutorials.adoc[Tutorials]
 ----
 
-=== add images
+== Initialize Antora's configuration
+
+Antora relies on a `antora.yml` configuration file that should be place at the root of the `docs\` directory
 
 [source,shell]
 ----
-mkdir docs/modules/ROOT/pages/assets/images
+# Initialize an empty navigation file
+touch docs/antora.yml
 ----
 
-=== include pages and partials
-
-https://docs.antora.org/antora/2.3/asciidoc/include-partial/
-
-
-[source,shell]
-----
-mkdir docs/modules/ROOT/partials
-echo "NOTE: this note will be included as partial" > docs/modules/ROOT/partials/partial_note.adoc
-----
-
-[source,asciidoc]
-----
-# Remove the trailing space, that was added here so the include doesn't execute
- include::ROOT:partial$partial_note.adoc[]
-----
-
-
-== make this project a Antora project
-
-Add antora.yml in docs/
+the content of the `antora.yml` should use the yaml syntax, use this snippet to initialize yours:
 
 [source,yaml]
 ----
-name: YOUR_DOC_NAME
-title: YOUR_DOC_TITLE
+name: NAME_OF_YOUR_DOC
+title: YOURTITLE_OF_YOUR_DOC_DOC_TITLE
 version: 0.0.0
 nav:
 - modules/ROOT/nav.adoc
 ----
 
-Add antora-playbook.yml at root of repository
+== Initialize configuration of the Antora build
+
+[source,shell]
+----
+# Initialize an empty navigation file
+touch antora-playbook.yml
+----
 
 [source,yaml]
 ----
 site:
   title: TITLE_OF_YOUR_DOC
   # the 404 page and sitemap files only get generated when the url property is set
-  url: https://github.com/camptocamp/NAME_OF_YOUR_PROJECT
-  start_page: YOUR_DOC_NAME::index.adoc
+  url: https://github.com/NAME_OF_YOUR_PROJECT
+  start_page: NAME_OF_YOUR_DOC::index.adoc
 content:
   sources:
   - url: ./
@@ -101,9 +121,13 @@ content:
     start_path: docs
 ui:
   bundle:
+    # Use camptocamp's UI bundle
     url: https://github.com/camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
+    # You can also use the default Antora UI if you prefer
+    # url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
     snapshot: true
   supplemental_files:
+  # Special setup to disable jekyll from github which messes up with the Theme of the resulting website
   - path: ui.yml
     contents: |
       static_files: [ .nojekyll ]
@@ -116,22 +140,24 @@ ui:
 [source,shell,subs="attributes"]
 .generate the site and open it in Chromium
 ----
-$ antora antora-playbook.yml
-$ chromium build/site/index.html
+antora antora-playbook.yml
+chromium build/site/index.html # Adapt if you don't use chromium as a web browser
 ----
 
+== Automate your Antora build using Github action and publish on Github Pages
 
-== Add Github action 
-
-TODO: format:  github action will build antora website
+It is very easy to automate the building and publishing of your documentation using Github Actions. 
 
 [source,shell]
 ----
-$ mkdir -p .github/workflows
-$ touch .github/workflows/antoradoc.yml
+# Create the github workflows directory
+mkdir -p .github/workflows
+# Generate an empty Github Action
+touch .github/workflows/antoradoc.yml
 ----
 
-You can use this content as is : 
+For the Github Action, use the following code snippet which does NOT require any modification to work:
+
 [source,yaml]
 ----
 name: Antora Doc 
@@ -187,11 +213,25 @@ jobs:
         COMMIT_MESSAGE: "[CI] Publish Documentation for ${{ github.sha }}"
 ----
 
+== Our first test
+
+=== Push our code
+
+At this stage, we should have a fully automated documentation website "build and publish" pipeline.
+
+Let's try it !
+
 [source,shell]
 ----
-$ git add .github/workflows/antoradoc.yml
-$ git commit -m"Add antora build workflow"
-$ git push
+# Make sure we won't push to build directory
+echo "build/" > .gitignore
+# and commit/push our first website
+git add .gitignore
+git add antora-playbook.yml
+git add docs/
+git add .github/workflows/antoradoc.yml
+git commit -m"Create new Antora documentation"
+git push
 ----
 
 == Setup Github pages
@@ -202,8 +242,56 @@ image::github_actions_p1.png[800,600]
 image::github_actions_p2.png[800,600]
 image::github_actions_p3.png[800,600]
 image::github_actions_p4.png[800,600]
-
 image::github_pages_settings.png[800,600]
+
+
+== Let's go further
+
+
+=== add images
+
+[source,shell]
+----
+mkdir docs/modules/ROOT/pages/assets/images
+----
+
+== Create additional pages
+
+one adoc will create one corresponding web page
+
+== Include pages in website (and nav bar)
+
+
+[source,shell]
+----
+touch docs/modules/ROOT/nav.adoc
+----
+
+
+[source,asciidoc]
+----
+* xref:index.adoc[Introduction]
+* xref:tutorials.adoc[Tutorials]
+----
+
+=== include pages and partials
+
+https://docs.antora.org/antora/2.3/asciidoc/include-partial/
+
+
+[source,shell]
+----
+mkdir docs/modules/ROOT/partials
+echo "NOTE: this note will be included as partial" > docs/modules/ROOT/partials/partial_note.adoc
+----
+
+[source,asciidoc]
+----
+# Remove the trailing space, that was added here so the include doesn't execute
+ include::ROOT:partial$partial_note.adoc[]
+----
+
+
 
 == Include external documentations 
 
