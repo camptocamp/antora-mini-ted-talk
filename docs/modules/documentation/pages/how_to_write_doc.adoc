@@ -1,5 +1,7 @@
 = How to participate to this documentation
 
+include::ROOT:partial$header_note.adoc[]
+
 The documentation of this project is located into the `docs/` folder and has to follow the xref:ref_documentation.adoc#_structure[Divio documentation structure].
 
 == Create a new Documentation page
