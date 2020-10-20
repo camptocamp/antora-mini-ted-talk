@@ -1,15 +1,7 @@
 :project-name: antora-mini-ted-talk
 :url-repo: https://github.com/camptocamp/{project-name}
 
-== Clone the project 
-
 include::ROOT:partial$header_note.adoc[]
-
-[source,shell,subs="attributes"]
-----
-$ git clone {url-repo}
-$ cd {project-name}
-----
 
 == Create the base module directory
 

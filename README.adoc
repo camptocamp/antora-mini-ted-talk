@@ -3,6 +3,8 @@ Aurélien Campergue <aurelien.campergue@camptocamp.com>
 :description: This contains the exlanations and the scenario to execute during the mini ted talk.
 :keywords: antora, asciidoc
 :sectanchors:
+:project-name: antora-mini-ted-talk
+:url-repo: https://github.com/camptocamp/{project-name}
 :published-url: https://camptocamp.github.io/antora-mini-ted-talk/
 
 
@@ -16,3 +18,11 @@ The documentation is written using Asciidoc and Antora and located in the docs/ 
 The https://documentation.divio.com/structure/[Divio documentation structure] is used to organize its content.
 
 The documentation is published here: {published-url}
+
+== Clone the project 
+
+[source,shell,subs="attributes"]
+----
+$ git clone {url-repo}
+$ cd {project-name}
+----
