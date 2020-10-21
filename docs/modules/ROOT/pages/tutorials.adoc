@@ -60,7 +60,7 @@ NOTE: Every file with `adoc` extension inside the `pages` subdirectory will gene
 
 == Initialize the navigation file
 
-We will know initialize a {antora-nav-page-url}[navigation file] which will allow us to include the index page in the resulting website.
+We will now initialize a {antora-nav-page-url}[navigation file] which will allow us to include the index page in the resulting website.
 
 [source,shell]
 ----
@@ -90,7 +90,7 @@ the content of the `antora.yml` should use the yaml syntax, use this snippet to 
 [source,yaml]
 ----
 name: NAME_OF_YOUR_DOC
-title: YOURTITLE_OF_YOUR_DOC_DOC_TITLE
+title: TITLE_OF_YOUR_DOC
 version: 0.0.0
 nav:
 - modules/ROOT/nav.adoc
