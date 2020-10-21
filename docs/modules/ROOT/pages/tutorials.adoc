@@ -119,9 +119,7 @@ content:
     start_path: docs
 ui:
   bundle:
-    # Use camptocamp's UI bundle
-    # url: https://github.com/camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
-    # You can also use the default Antora UI if you prefer
+    # Use the default Antora UI
     url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
     snapshot: true
   supplemental_files:
@@ -234,13 +232,9 @@ git push
 
 == Setup Github pages
 
-WAIT for end of first Github action run because creating a new gh-pages branch
+IMPORTANT: Wait for end of first Github action run because it will create a new branch named *gh-pages*
 
-image::github_actions_p1.png[800,600]
-
-=== using UI
-
-setup ghpage, use gh-pages branch and build from root
+We will simply activate the Github Pages functionality and set it up to build the site from the root directory of the *gh-pages* branch
 
 image::github_pages_settings.png[800,600]
 
@@ -312,7 +306,12 @@ echo -e '\ninclude::additional_module:partial$partial_page.adoc[]\n' >> docs/mod
 == Update the navigation file
 
 We'll now update the navigation file to include the additional page
-echo -e "* xref:additional_module:additional_page.adoc[Additional Page]" >> docs/modules/ROOT/nav.adoc
+
+
+[source,shell]
+----
+echo -e "\n* xref:additional_module:additional_page.adoc[Additional Page]" >> docs/modules/ROOT/nav.adoc
+----
 
 The resulting file will look like this 
 [source,asciidoc]
@@ -323,49 +322,39 @@ The resulting file will look like this
 
 == Change Appearance of the resulting Website
 
+The Appearance of the resulting website is externalized. A UI Bundle is pulled during the build and can be easily changed.
 
-== Include external documentations 
-
-To create a meta doc and/or links to other documentations, you can add links to those projects in the `antora-playbook.yml`
-
-try adding :
+In the `antora-playbook.yml`, you can set the ui.bundle.url to target any ui bundle you'd like.
 
 [source,yaml]
 ----
-  - url: https://github.com/camptocamp/camptocamp-devops-stack
-    branches: master
-    edit_url: false
-    start_path: docs
-----
-
-to make your antora-playbook look like 
-
-[source,yaml]
-----
-site:
-  title: TITLE_OF_YOUR_DOC
-  # the 404 page and sitemap files only get generated when the url property is set
-  url: https://github.com/camptocamp/NAME_OF_YOUR_PROJECT
-  start_page: YOUR_DOC_NAME::index.adoc
-content:
-  sources:
-  - url: ./
-    branches: HEAD
-    edit_url: false
-    start_path: docs
-  - url: https://github.com/camptocamp/camptocamp-devops-stack
-    branches: master
-    edit_url: false
-    start_path: docs
 ui:
   bundle:
+    ## Use the default Antora UI
+    #url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
+    ## Use camptocamp's UI bundle
     url: https://github.com/camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
-    # Using a modified version with dark theme for local tests
+    ## Use a modified version of camptocamp's UI with dark theme for local tests without burning my eyes
     #url: https://github.com/acampergue-camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
+    ## Or even steal the UI from other project
+    #url: https://github.com/aerogear/antora-ui/raw/master/build/ui-bundle.zip
+    #url: https://deepsymmetry.org/media/antora/ui-bundle.zip
     snapshot: true
-  supplemental_files:
-  - path: ui.yml
-    contents: |
-      static_files: [ .nojekyll ]
-  - path: .nojekyll
+----
+
+== Include external documentations
+
+With Antora, you can easily incorporate other documentations sites into yours. It allows you to create a "meta" documentation site where you coud for example incorporate the documentations of all dependencies you have, in the versions you're using.
+
+To do so, we simply have to add `content.sources.url` entries referencing external projects in the `antora-playbook.yml`
+
+[source,yaml]
+----
+content:
+  sources:
+  - url: https://github.com/camptocamp/camptocamp-devops-stack
+    branches: master
+    tags: [v0.4.1,v0.5.1]
+    edit_url: false
+    start_path: docs
 ----
