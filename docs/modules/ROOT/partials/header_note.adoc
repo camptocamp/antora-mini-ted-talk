@@ -1,1 +1,0 @@
-NOTE: this header is from a partial page that can be included in multiple pages

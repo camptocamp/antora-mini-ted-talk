@@ -7,7 +7,7 @@
 
 To illustrate the possibilities of the {antora-docs-url}[Antora Tool] in {github-url}[Github], we'll create a first project together.
 
-IMPORTANT: You need to https://docs.antora.org/antora/2.3/install/install-antora/[install antora] if you want to generate your documentation locally before pushing it.
+IMPORTANT: You need to https://docs.antora.org/antora/2.3/install/install-antora/[install antora] if you want to generate your documentation locally.
 
 == Initialize your project
 

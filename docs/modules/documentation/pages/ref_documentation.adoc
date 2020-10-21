@@ -1,5 +1,3 @@
-include::ROOT:partial$header_note.adoc[]
-
 == Documentation
 
 === Structure
