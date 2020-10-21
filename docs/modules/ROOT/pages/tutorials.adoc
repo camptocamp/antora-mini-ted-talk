@@ -51,8 +51,6 @@ Author Name <author.name@camptocamp.com>
 :sectanchors:
 :url-repo: https://github.com/NAME_OF_YOUR_PROJECT
 
-image::github.svg[link="{url-repo}",150,250]
-
 {url-repo}[This repository] contains the my test code for this Antora's Hands-on.
 
 video::BAJ8F7yQz64[youtube]
@@ -83,7 +81,7 @@ Antora relies on a `antora.yml` configuration file that should be place at the r
 
 [source,shell]
 ----
-# Initialize an empty navigation file
+# Initialize an empty antora configuration file
 touch docs/antora.yml
 ----
 
@@ -122,9 +120,9 @@ content:
 ui:
   bundle:
     # Use camptocamp's UI bundle
-    url: https://github.com/camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
+    # url: https://github.com/camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
     # You can also use the default Antora UI if you prefer
-    # url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
     snapshot: true
   supplemental_files:
   # Special setup to disable jekyll from github which messes up with the Theme of the resulting website
@@ -236,61 +234,94 @@ git push
 
 == Setup Github pages
 
-=== using UI
+WAIT for end of first Github action run because creating a new gh-pages branch
 
 image::github_actions_p1.png[800,600]
-image::github_actions_p2.png[800,600]
-image::github_actions_p3.png[800,600]
-image::github_actions_p4.png[800,600]
+
+=== using UI
+
+setup ghpage, use gh-pages branch and build from root
+
 image::github_pages_settings.png[800,600]
 
 
 == Let's go further
 
-
-=== add images
-
-[source,shell]
-----
-mkdir docs/modules/ROOT/pages/assets/images
-----
-
-== Create additional pages
-
-one adoc will create one corresponding web page
-
-== Include pages in website (and nav bar)
-
+=== Create  an additional page in an additional module
 
 [source,shell]
 ----
-touch docs/modules/ROOT/nav.adoc
+# Create pages directory in additional module
+mkdir -p docs/modules/additional_module/pages
+
+# Initialize an new additional adoc file
+echo -e "= Additional Page Title\n" > docs/modules/additional_module/pages/additional_page.adoc
 ----
 
+=== add an image in the content
 
+[source,shell]
+----
+# Create images asset directory in the new module
+mkdir -p docs/modules/additional_module/assets/images
+
+# Download an image of Antora in this newly created directory
+wget https://assets.gitlab-static.net/uploads/-/system/group/avatar/1984945/antora-gitlab.png --output-document docs/modules/additional_module/assets/images/antora.png
+
+echo "Below this text, we'll display an image of Antora logo which will contain a hyperlink to Antora's gitlab
+
+image::antora.png[link=\"https://gitlab.com/antora\",150,250]
+
+" >> docs/modules/additional_module/pages/additional_page.adoc
+----
+
+=== Create a partial page
+
+A https://docs.antora.org/antora/2.3/asciidoc/include-partial/[partial page] is an asciidoc file that can be included in multiple pages.
+It won't be processed by Antora and won't produce a HTML file in the resulting documentation.
+
+
+[source,shell]
+----
+# Create a partials directory in the new module
+mkdir -p docs/modules/additional_module/partials
+
+# Generate an empty partial page
+touch docs/modules/additional_module/partials/partial_page.adoc
+----
+
+=== Include a notice in the partial
+
+[source,shell]
+----
+# The partial will contain an "IMPORTANT" message that will be displayed with a Red label
+echo -e "\nIMPORTANT: this very important message is part of the partial page\n" > docs/modules/additional_module/partials/partial_page.adoc
+----
+
+=== Include the partial in multiples pages
+
+[source,shell]
+----
+# Include the partial page in the first index page
+echo -e '\ninclude::additional_module:partial$partial_page.adoc[]\n' >> docs/modules/ROOT/pages/index.adoc
+
+# Include the partial page in the additional page
+echo -e '\ninclude::additional_module:partial$partial_page.adoc[]\n' >> docs/modules/additional_module/pages/additional_page.adoc
+----
+
+== Update the navigation file
+
+We'll now update the navigation file to include the additional page
+echo -e "* xref:additional_module:additional_page.adoc[Additional Page]" >> docs/modules/ROOT/nav.adoc
+
+The resulting file will look like this 
 [source,asciidoc]
 ----
 * xref:index.adoc[Introduction]
-* xref:tutorials.adoc[Tutorials]
+* xref:additional_module:additional_page.adoc[Additional Page]
 ----
 
-=== include pages and partials
-
-https://docs.antora.org/antora/2.3/asciidoc/include-partial/
-
-
-[source,shell]
-----
-mkdir docs/modules/ROOT/partials
-echo "NOTE: this note will be included as partial" > docs/modules/ROOT/partials/partial_note.adoc
-----
-
-[source,asciidoc]
-----
-# Remove the trailing space, that was added here so the include doesn't execute
- include::ROOT:partial$partial_note.adoc[]
-----
-
+== Change Appearance of the resulting Website
 
 
 == Include external documentations 
