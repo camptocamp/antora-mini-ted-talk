@@ -192,8 +192,6 @@ Author Name &lt;author.name@camptocamp.com&gt;
 :sectanchors:
 :url-repo: https://github.com/NAME_OF_YOUR_PROJECT
 
-image::github.svg[link="{url-repo}",150,250]
-
 {url-repo}[This repository] contains the my test code for this Antora's Hands-on.
 
 video::BAJ8F7yQz64[youtube]</code></pre>
@@ -243,7 +241,7 @@ touch docs/modules/ROOT/nav.adoc</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># Initialize an empty navigation file
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># Initialize an empty antora configuration file
 touch docs/antora.yml</code></pre>
 </div>
 </div>
@@ -286,9 +284,9 @@ content:
 ui:
   bundle:
     # Use camptocamp's UI bundle
-    url: https://github.com/camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
+    # url: https://github.com/camptocamp/antora-ui/releases/download/LATEST/ui-bundle.zip
     # You can also use the default Antora UI if you prefer
-    # url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/master/raw/build/ui-bundle.zip?job=bundle-stable
     snapshot: true
   supplemental_files:
   # Special setup to disable jekyll from github which messes up with the Theme of the resulting website
@@ -416,27 +414,18 @@ git push</code></pre>
 <div class="sect1">
 <h2 id="_setup_github_pages"><a class="anchor" href="#_setup_github_pages"></a>Setup Github pages</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_using_ui"><a class="anchor" href="#_using_ui"></a>using UI</h3>
+<div class="paragraph">
+<p>WAIT for end of first Github action run because creating a new gh-pages branch</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/github_actions_p1.png" alt="800" width="600">
 </div>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/github_actions_p2.png" alt="800" width="600">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/github_actions_p3.png" alt="800" width="600">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/github_actions_p4.png" alt="800" width="600">
-</div>
+<div class="sect2">
+<h3 id="_using_ui"><a class="anchor" href="#_using_ui"></a>using UI</h3>
+<div class="paragraph">
+<p>setup ghpage, use gh-pages branch and build from root</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -450,55 +439,96 @@ git push</code></pre>
 <h2 id="_lets_go_further"><a class="anchor" href="#_lets_go_further"></a>Let&#8217;s go further</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_add_images"><a class="anchor" href="#_add_images"></a>add images</h3>
+<h3 id="_create_an_additional_page_in_an_additional_module"><a class="anchor" href="#_create_an_additional_page_in_an_additional_module"></a>Create  an additional page in an additional module</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">mkdir docs/modules/ROOT/pages/assets/images</code></pre>
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># Create pages directory in additional module
+mkdir -p docs/modules/additional_module/pages
+
+# Initialize an new additional adoc file
+echo -e "= Additional Page Title\n" &gt; docs/modules/additional_module/pages/additional_page.adoc</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_add_an_image_in_the_content"><a class="anchor" href="#_add_an_image_in_the_content"></a>add an image in the content</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># Create images asset directory in the new module
+mkdir -p docs/modules/additional_module/assets/images
+
+# Download an image of Antora in this newly created directory
+wget https://assets.gitlab-static.net/uploads/-/system/group/avatar/1984945/antora-gitlab.png --output-document docs/modules/additional_module/assets/images/antora.png
+
+echo "Below this text, we'll display an image of Antora logo which will contain a hyperlink to Antora's gitlab
+
+image::antora.png[link=\"https://gitlab.com/antora\",150,250]
+
+" &gt;&gt; docs/modules/additional_module/pages/additional_page.adoc</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_a_partial_page"><a class="anchor" href="#_create_a_partial_page"></a>Create a partial page</h3>
+<div class="paragraph">
+<p>A <a href="https://docs.antora.org/antora/2.3/asciidoc/include-partial/">partial page</a> is an asciidoc file that can be included in multiple pages.
+It won&#8217;t be processed by Antora and won&#8217;t produce a HTML file in the resulting documentation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># Create a partials directory in the new module
+mkdir -p docs/modules/additional_module/partials
+
+# Generate an empty partial page
+touch docs/modules/additional_module/partials/partial_page.adoc</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_include_a_notice_in_the_partial"><a class="anchor" href="#_include_a_notice_in_the_partial"></a>Include a notice in the partial</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># The partial will contain an "IMPORTANT" message that will be displayed with a Red label
+echo -e "\nIMPORTANT: this very important message is part of the partial page\n" &gt; docs/modules/additional_module/partials/partial_page.adoc</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_include_the_partial_in_multiples_pages"><a class="anchor" href="#_include_the_partial_in_multiples_pages"></a>Include the partial in multiples pages</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># Include the partial page in the first index page
+echo -e '\ninclude::additional_module:partial$partial_page.adoc[]\n' &gt;&gt; docs/modules/ROOT/pages/index.adoc
+
+# Include the partial page in the additional page
+echo -e '\ninclude::additional_module:partial$partial_page.adoc[]\n' &gt;&gt; docs/modules/additional_module/pages/additional_page.adoc</code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_create_additional_pages"><a class="anchor" href="#_create_additional_pages"></a>Create additional pages</h2>
+<h2 id="_update_the_navigation_file"><a class="anchor" href="#_update_the_navigation_file"></a>Update the navigation file</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>one adoc will create one corresponding web page</p>
+<p>We&#8217;ll now update the navigation file to include the additional page
+echo -e "* <a href="#additional_module:additional_page.adoc" class="page unresolved">Additional Page</a>" &gt;&gt; docs/modules/ROOT/nav.adoc</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_include_pages_in_website_and_nav_bar"><a class="anchor" href="#_include_pages_in_website_and_nav_bar"></a>Include pages in website (and nav bar)</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">touch docs/modules/ROOT/nav.adoc</code></pre>
-</div>
+<div class="paragraph">
+<p>The resulting file will look like this</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">* xref:index.adoc[Introduction]
-* xref:tutorials.adoc[Tutorials]</code></pre>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_include_pages_and_partials"><a class="anchor" href="#_include_pages_and_partials"></a>include pages and partials</h3>
-<div class="paragraph">
-<p><a href="https://docs.antora.org/antora/2.3/asciidoc/include-partial/" class="bare">https://docs.antora.org/antora/2.3/asciidoc/include-partial/</a></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">mkdir docs/modules/ROOT/partials
-echo "NOTE: this note will be included as partial" &gt; docs/modules/ROOT/partials/partial_note.adoc</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc"># Remove the trailing space, that was added here so the include doesn't execute
- include::ROOT:partial$partial_note.adoc[]</code></pre>
+* xref:additional_module:additional_page.adoc[Additional Page]</code></pre>
 </div>
 </div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_change_appearance_of_the_resulting_website"><a class="anchor" href="#_change_appearance_of_the_resulting_website"></a>Change Appearance of the resulting Website</h2>
+<div class="sectionbody">
+
 </div>
 </div>
 <div class="sect1">
