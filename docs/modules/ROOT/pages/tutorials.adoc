@@ -1,13 +1,15 @@
 = Antora's Hands-on
 :project-name: antora-mini-ted-talk
 :url-repo: https://github.com/camptocamp/{project-name}
-:antora-docs-url: https://docs.antora.org/antora/2.3/
+:antora-docs-url: https://docs.antora.org/antora/2.3
 :github-url: https://github.com/
-:antora-nav-page-url: https://docs.antora.org/antora/2.3/navigation/files-and-lists/#whats-a-nav-file
+:antora-nav-page-url: {antora-docs-url}/navigation/files-and-lists/#whats-a-nav-file
+:antora-doc-xref-url: {antora-docs-url}/asciidoc/page-to-page-xref/#xref-and-page-id-anatomy
+:antora-doc-coordinates-url: {antora-docs-url}/page/page-id/#id-coordinates
 
 To illustrate the possibilities of the {antora-docs-url}[Antora Tool] in {github-url}[Github], we'll create a first project together.
 
-IMPORTANT: You need to https://docs.antora.org/antora/2.3/install/install-antora/[install antora] if you want to generate your documentation locally.
+IMPORTANT: You need to {antora-docs-url}/install/install-antora/[install antora] if you want to generate your documentation locally.
 
 == Initialize your project
 
@@ -69,13 +71,22 @@ We will now initialize a {antora-nav-page-url}[navigation file] which will allow
 touch docs/modules/ROOT/nav.adoc
 ----
 
-the content of the `nav.adoc` should be structure as a list of references, use this snippet to initialize yours
+Every page in the documentation is identified by a {antora-doc-coordinates-url}[sequence of coordinates]:
+
+image::page-id-diagram.svg[link="{antora-doc-coordinates-url}",400,300]
+
+Those coordinates are then used to build cross-references, abreviated {antora-doc-xref-url}[xref]:
+
+image::xref-macro-anatomy-diagram.svg[link="{antora-doc-xref-url}"600,450]
+
+the navigation file is structured as a list of cross-references. Use this snippet to initialize yours:
 
 [source,asciidoc]
 ./docs/modules/ROOT/nav.adoc
 ----
 * xref:index.adoc[Introduction]
 ----
+
 
 == Initialize Antora's configuration
 
@@ -303,7 +314,7 @@ image::antora.png[link=\"https://gitlab.com/antora\",150,250]
 
 == Create a partial page
 
-A https://docs.antora.org/antora/2.3/asciidoc/include-partial/[partial page] is an asciidoc file that can be included in multiple pages.
+A {antora-docs-url}/asciidoc/include-partial/[partial page] is an asciidoc file that can be included in multiple pages.
 It won't be processed by Antora and won't produce a HTML file in the resulting documentation.
 
 
