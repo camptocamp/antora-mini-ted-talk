@@ -243,10 +243,7 @@ We will simply activate the Github Pages functionality and set it up to build th
 
 image::github_pages_settings.png[800,600]
 
-
-== Let's go further
-
-=== Create an additional page in an additional module
+== Create an additional page in an additional module
 
 We will create an additional page in a separated module
 
@@ -259,7 +256,7 @@ mkdir -p docs/modules/additional_module/pages
 echo -e "= Additional Page Title\n" > docs/modules/additional_module/pages/additional_page.adoc
 ----
 
-=== Update the navigation file
+== Update the navigation file
 
 We will update the navigation file to include  a reference to the additional page
 
@@ -276,7 +273,7 @@ We will update the navigation file to include  a reference to the additional pag
 echo "* xref:additional_module:additional_page.adoc[Additional Page]" >> docs/modules/ROOT/nav.adoc
 ----
 
-=== add an image in the content
+== add an image in the content
 
 Adding an image requires the image to be stored in a specific `assets/images` subdirectory of the module.
 Then we simply have to add an image directive to our asciidoc file.
@@ -304,7 +301,7 @@ image::antora.png[link=\"https://gitlab.com/antora\",150,250]
 " >> docs/modules/additional_module/pages/additional_page.adoc
 ----
 
-=== Create a partial page
+== Create a partial page
 
 A https://docs.antora.org/antora/2.3/asciidoc/include-partial/[partial page] is an asciidoc file that can be included in multiple pages.
 It won't be processed by Antora and won't produce a HTML file in the resulting documentation.
@@ -319,7 +316,7 @@ mkdir -p docs/modules/additional_module/partials
 touch docs/modules/additional_module/partials/partial_page.adoc
 ----
 
-=== Include a notice in the partial
+== Include a notice in the partial
 
 The partial will contain an "IMPORTANT" message that will be displayed with a Red label
 
@@ -335,7 +332,7 @@ IMPORTANT: this very important message is part of the partial page
 echo "IMPORTANT: this very important message is part of the partial page" >> docs/modules/additional_module/partials/partial_page.adoc
 ----
 
-=== Include the partial in multiples pages
+== Include the partial in multiples pages
 
 To include this partial in other pages, we simply have to add an include an include directive
 
