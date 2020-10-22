@@ -43,6 +43,7 @@ touch docs/modules/ROOT/pages/index.adoc
 the content of the `index.adoc` should use the https://asciidoc.org/[Asciidoc] syntax. Use the following code snippet to initialize this file :
 
 [source,asciidoc]
+./docs/modules/ROOT/pages/index.adoc
 ----
 = Document's title (Level 0)
 Author Name <author.name@camptocamp.com>
@@ -71,6 +72,7 @@ touch docs/modules/ROOT/nav.adoc
 the content of the `nav.adoc` should be structure as a list of references, use this snippet to initialize yours
 
 [source,asciidoc]
+./docs/modules/ROOT/nav.adoc
 ----
 * xref:index.adoc[Introduction]
 ----
@@ -88,6 +90,7 @@ touch docs/antora.yml
 the content of the `antora.yml` should use the yaml syntax, use this snippet to initialize yours:
 
 [source,yaml]
+./docs/antora.yml
 ----
 name: NAME_OF_YOUR_DOC
 title: TITLE_OF_YOUR_DOC
@@ -105,6 +108,7 @@ touch antora-playbook.yml
 ----
 
 [source,yaml]
+./antora-playbook.yml
 ----
 site:
   title: TITLE_OF_YOUR_DOC
@@ -155,6 +159,7 @@ touch .github/workflows/antoradoc.yml
 For the Github Action, use the following code snippet which does NOT require any modification to work:
 
 [source,yaml]
+./.github/workflows/antoradoc.yml
 ----
 name: Antora Doc 
 on:
@@ -259,14 +264,14 @@ echo -e "= Additional Page Title\n" > docs/modules/additional_module/pages/addit
 We will update the navigation file to include  a reference to the additional page
 
 [source,asciidoc]
-.content of `docs/modules/ROOT/nav.adoc`
+./docs/modules/ROOT/nav.adoc
 ----
 * xref:index.adoc[Introduction]
 * xref:additional_module:additional_page.adoc[Additional Page]
 ----
 
 [source,shell]
-.Oneliner to add the previous reference in the nav.adoc file 
+.onliner to update the nav.adoc 
 ----
 echo "* xref:additional_module:additional_page.adoc[Additional Page]" >> docs/modules/ROOT/nav.adoc
 ----
@@ -319,6 +324,7 @@ touch docs/modules/additional_module/partials/partial_page.adoc
 The partial will contain an "IMPORTANT" message that will be displayed with a Red label
 
 [source,yaml]
+./docs/modules/additional_module/partials/partial_page.adoc
 ----
 IMPORTANT: this very important message is part of the partial page
 ----
@@ -334,7 +340,7 @@ echo "IMPORTANT: this very important message is part of the partial page" >> doc
 To include this partial in other pages, we simply have to add an include an include directive
 
 [source,yaml]
-.snippet for include directive
+.snippet with include directive
 ----
 # NOTE: A trailing space was added to prevent the directive to be executed in this document
  include::additional_module:partial$partial_page.adoc[]
