@@ -176,6 +176,7 @@ touch docs/modules/ROOT/pages/index.adoc</code></pre>
 <p>the content of the <code>index.adoc</code> should use the <a href="https://asciidoc.org/">Asciidoc</a> syntax. Use the following code snippet to initialize this file :</p>
 </div>
 <div class="listingblock">
+<div class="title">/docs/modules/ROOT/pages/index.adoc</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">= Document's title (Level 0)
 Author Name &lt;author.name@camptocamp.com&gt;
@@ -219,6 +220,7 @@ touch docs/modules/ROOT/nav.adoc</code></pre>
 <p>the content of the <code>nav.adoc</code> should be structure as a list of references, use this snippet to initialize yours</p>
 </div>
 <div class="listingblock">
+<div class="title">/docs/modules/ROOT/nav.adoc</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">* xref:index.adoc[Introduction]</code></pre>
 </div>
@@ -241,6 +243,7 @@ touch docs/antora.yml</code></pre>
 <p>the content of the <code>antora.yml</code> should use the yaml syntax, use this snippet to initialize yours:</p>
 </div>
 <div class="listingblock">
+<div class="title">/docs/antora.yml</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">name: NAME_OF_YOUR_DOC
 title: TITLE_OF_YOUR_DOC
@@ -261,6 +264,7 @@ touch antora-playbook.yml</code></pre>
 </div>
 </div>
 <div class="listingblock">
+<div class="title">/antora-playbook.yml</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">site:
   title: TITLE_OF_YOUR_DOC
@@ -318,6 +322,7 @@ touch .github/workflows/antoradoc.yml</code></pre>
 <p>For the Github Action, use the following code snippet which does NOT require any modification to work:</p>
 </div>
 <div class="listingblock">
+<div class="title">/.github/workflows/antoradoc.yml</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">name: Antora Doc
 on:
@@ -450,14 +455,14 @@ echo -e "= Additional Page Title\n" &gt; docs/modules/additional_module/pages/ad
 <p>We will update the navigation file to include  a reference to the additional page</p>
 </div>
 <div class="listingblock">
-<div class="title">content of <code>docs/modules/ROOT/nav.adoc</code></div>
+<div class="title">/docs/modules/ROOT/nav.adoc</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">* xref:index.adoc[Introduction]
 * xref:additional_module:additional_page.adoc[Additional Page]</code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Oneliner to add the previous reference in the nav.adoc file</div>
+<div class="title">onliner to update the nav.adoc</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">echo "* xref:additional_module:additional_page.adoc[Additional Page]" &gt;&gt; docs/modules/ROOT/nav.adoc</code></pre>
 </div>
@@ -515,6 +520,7 @@ touch docs/modules/additional_module/partials/partial_page.adoc</code></pre>
 <p>The partial will contain an "IMPORTANT" message that will be displayed with a Red label</p>
 </div>
 <div class="listingblock">
+<div class="title">/docs/modules/additional_module/partials/partial_page.adoc</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">IMPORTANT: this very important message is part of the partial page</code></pre>
 </div>
@@ -532,7 +538,7 @@ touch docs/modules/additional_module/partials/partial_page.adoc</code></pre>
 <p>To include this partial in other pages, we simply have to add an include an include directive</p>
 </div>
 <div class="listingblock">
-<div class="title">snippet for include directive</div>
+<div class="title">snippet with include directive</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml"># NOTE: A trailing space was added to prevent the directive to be executed in this document
  include::additional_module:partial$partial_page.adoc[]</code></pre>
