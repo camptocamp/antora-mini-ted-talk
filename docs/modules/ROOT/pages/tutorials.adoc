@@ -241,7 +241,9 @@ image::github_pages_settings.png[800,600]
 
 == Let's go further
 
-=== Create  an additional page in an additional module
+=== Create an additional page in an additional module
+
+We will create an additional page in a separated module
 
 [source,shell]
 ----
@@ -252,7 +254,35 @@ mkdir -p docs/modules/additional_module/pages
 echo -e "= Additional Page Title\n" > docs/modules/additional_module/pages/additional_page.adoc
 ----
 
+=== Update the navigation file
+
+We will update the navigation file to include  a reference to the additional page
+
+[source,asciidoc]
+.content of `docs/modules/ROOT/nav.adoc`
+----
+* xref:index.adoc[Introduction]
+* xref:additional_module:additional_page.adoc[Additional Page]
+----
+
+[source,shell]
+.Oneliner to add the previous reference in the nav.adoc file 
+----
+echo "* xref:additional_module:additional_page.adoc[Additional Page]" >> docs/modules/ROOT/nav.adoc
+----
+
 === add an image in the content
+
+Adding an image requires the image to be stored in a specific `assets/images` subdirectory of the module.
+Then we simply have to add an image directive to our asciidoc file.
+
+[source,asciidoc]
+.image directive that we'll add
+----
+Below this text, we'll display an image of Antora logo which will contain a hyperlink to Antora's gitlab
+
+image::antora.png[link=\"https://gitlab.com/antora\",150,250]
+----
 
 [source,shell]
 ----
@@ -286,38 +316,38 @@ touch docs/modules/additional_module/partials/partial_page.adoc
 
 === Include a notice in the partial
 
-[source,shell]
+The partial will contain an "IMPORTANT" message that will be displayed with a Red label
+
+[source,yaml]
 ----
-# The partial will contain an "IMPORTANT" message that will be displayed with a Red label
-echo -e "\nIMPORTANT: this very important message is part of the partial page\n" > docs/modules/additional_module/partials/partial_page.adoc
+IMPORTANT: this very important message is part of the partial page
+----
+
+[source,shell]
+.oneliner to add the IMPORTANT message in the partial page
+----
+echo "IMPORTANT: this very important message is part of the partial page" >> docs/modules/additional_module/partials/partial_page.adoc
 ----
 
 === Include the partial in multiples pages
 
+To include this partial in other pages, we simply have to add an include an include directive
+
+[source,yaml]
+.snippet for include directive
+----
+# NOTE: A trailing space was added to prevent the directive to be executed in this document
+ include::additional_module:partial$partial_page.adoc[]
+----
+
 [source,shell]
+.Add the include directive in both pages we already created
 ----
 # Include the partial page in the first index page
 echo -e '\ninclude::additional_module:partial$partial_page.adoc[]\n' >> docs/modules/ROOT/pages/index.adoc
 
 # Include the partial page in the additional page
 echo -e '\ninclude::additional_module:partial$partial_page.adoc[]\n' >> docs/modules/additional_module/pages/additional_page.adoc
-----
-
-== Update the navigation file
-
-We'll now update the navigation file to include the additional page
-
-
-[source,shell]
-----
-echo -e "\n* xref:additional_module:additional_page.adoc[Additional Page]" >> docs/modules/ROOT/nav.adoc
-----
-
-The resulting file will look like this 
-[source,asciidoc]
-----
-* xref:index.adoc[Introduction]
-* xref:additional_module:additional_page.adoc[Additional Page]
 ----
 
 == Change Appearance of the resulting Website
