@@ -430,7 +430,10 @@ Wait for end of first Github action run because it will create a new branch name
 <h2 id="_lets_go_further"><a class="anchor" href="#_lets_go_further"></a>Let&#8217;s go further</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_create_an_additional_page_in_an_additional_module"><a class="anchor" href="#_create_an_additional_page_in_an_additional_module"></a>Create  an additional page in an additional module</h3>
+<h3 id="_create_an_additional_page_in_an_additional_module"><a class="anchor" href="#_create_an_additional_page_in_an_additional_module"></a>Create an additional page in an additional module</h3>
+<div class="paragraph">
+<p>We will create an additional page in a separated module</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># Create pages directory in additional module
@@ -442,7 +445,38 @@ echo -e "= Additional Page Title\n" &gt; docs/modules/additional_module/pages/ad
 </div>
 </div>
 <div class="sect2">
+<h3 id="_update_the_navigation_file"><a class="anchor" href="#_update_the_navigation_file"></a>Update the navigation file</h3>
+<div class="paragraph">
+<p>We will update the navigation file to include  a reference to the additional page</p>
+</div>
+<div class="listingblock">
+<div class="title">content of <code>docs/modules/ROOT/nav.adoc</code></div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">* xref:index.adoc[Introduction]
+* xref:additional_module:additional_page.adoc[Additional Page]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Oneliner to add the previous reference in the nav.adoc file</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">echo "* xref:additional_module:additional_page.adoc[Additional Page]" &gt;&gt; docs/modules/ROOT/nav.adoc</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_add_an_image_in_the_content"><a class="anchor" href="#_add_an_image_in_the_content"></a>add an image in the content</h3>
+<div class="paragraph">
+<p>Adding an image requires the image to be stored in a specific <code>assets/images</code> subdirectory of the module.
+Then we simply have to add an image directive to our asciidoc file.</p>
+</div>
+<div class="listingblock">
+<div class="title">image directive that we&#8217;ll add</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">Below this text, we'll display an image of Antora logo which will contain a hyperlink to Antora's gitlab
+
+image::antora.png[link=\"https://gitlab.com/antora\",150,250]</code></pre>
+</div>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># Create images asset directory in the new module
@@ -477,16 +511,35 @@ touch docs/modules/additional_module/partials/partial_page.adoc</code></pre>
 </div>
 <div class="sect2">
 <h3 id="_include_a_notice_in_the_partial"><a class="anchor" href="#_include_a_notice_in_the_partial"></a>Include a notice in the partial</h3>
+<div class="paragraph">
+<p>The partial will contain an "IMPORTANT" message that will be displayed with a Red label</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># The partial will contain an "IMPORTANT" message that will be displayed with a Red label
-echo -e "\nIMPORTANT: this very important message is part of the partial page\n" &gt; docs/modules/additional_module/partials/partial_page.adoc</code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">IMPORTANT: this very important message is part of the partial page</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">oneliner to add the IMPORTANT message in the partial page</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">echo "IMPORTANT: this very important message is part of the partial page" &gt;&gt; docs/modules/additional_module/partials/partial_page.adoc</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_include_the_partial_in_multiples_pages"><a class="anchor" href="#_include_the_partial_in_multiples_pages"></a>Include the partial in multiples pages</h3>
+<div class="paragraph">
+<p>To include this partial in other pages, we simply have to add an include an include directive</p>
+</div>
 <div class="listingblock">
+<div class="title">snippet for include directive</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml"># NOTE: A trailing space was added to prevent the directive to be executed in this document
+ include::additional_module:partial$partial_page.adoc[]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Add the include directive in both pages we already created</div>
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># Include the partial page in the first index page
 echo -e '\ninclude::additional_module:partial$partial_page.adoc[]\n' &gt;&gt; docs/modules/ROOT/pages/index.adoc
@@ -494,28 +547,6 @@ echo -e '\ninclude::additional_module:partial$partial_page.adoc[]\n' &gt;&gt; do
 # Include the partial page in the additional page
 echo -e '\ninclude::additional_module:partial$partial_page.adoc[]\n' &gt;&gt; docs/modules/additional_module/pages/additional_page.adoc</code></pre>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_update_the_navigation_file"><a class="anchor" href="#_update_the_navigation_file"></a>Update the navigation file</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>We&#8217;ll now update the navigation file to include the additional page</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">echo -e "\n* xref:additional_module:additional_page.adoc[Additional Page]" &gt;&gt; docs/modules/ROOT/nav.adoc</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The resulting file will look like this</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">* xref:index.adoc[Introduction]
-* xref:additional_module:additional_page.adoc[Additional Page]</code></pre>
 </div>
 </div>
 </div>
