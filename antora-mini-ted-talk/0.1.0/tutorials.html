@@ -108,7 +108,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>To illustrate the possibilities of the <a href="https://docs.antora.org/antora/2.3/">Antora Tool</a> in <a href="https://github.com/">Github</a>, we&#8217;ll create a first project together.</p>
+<p>To illustrate the possibilities of the <a href="https://docs.antora.org/antora/2.3">Antora Tool</a> in <a href="https://github.com/">Github</a>, we&#8217;ll create a first project together.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -217,7 +217,23 @@ touch docs/modules/ROOT/nav.adoc</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>the content of the <code>nav.adoc</code> should be structure as a list of references, use this snippet to initialize yours</p>
+<p>Every page in the documentation is identified by a <a href="https://docs.antora.org/antora/2.3/page/page-id/#id-coordinates">sequence of coordinates</a>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="https://docs.antora.org/antora/2.3/page/page-id/#id-coordinates"><img src="_images/page-id-diagram.svg" alt="page id diagram" width="400" height="300"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>Those coordinates are then used to build cross-references, abreviated <a href="https://docs.antora.org/antora/2.3/asciidoc/page-to-page-xref/#xref-and-page-id-anatomy">xref</a>:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="https://docs.antora.org/antora/2.3/asciidoc/page-to-page-xref/#xref-and-page-id-anatomy"><img src="_images/xref-macro-anatomy-diagram.svg" alt="xref macro anatomy diagram" width="600" height="450"></a>
+</div>
+</div>
+<div class="paragraph">
+<p>the navigation file is structured as a list of cross-references. Use this snippet to initialize yours:</p>
 </div>
 <div class="listingblock">
 <div class="title">/docs/modules/ROOT/nav.adoc</div>
